@@ -6,6 +6,10 @@ def process(bug, FPS, total_frames):
 			pygame.quit()
 			sys.exit()
 
+		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_e:
+				classes.BugProjectile.fire = not classes.BugProjectile.fire
+
 	# Returns a list of all the keys whther pressed or not
 	keys = pygame.key.get_pressed()
 
@@ -27,13 +31,19 @@ def process(bug, FPS, total_frames):
 		bug.jumping = True
 
 	if keys[pygame.K_SPACE]:
-		p = classes.BugProjectile(bug.rect.x, bug.rect.y, 43, 25,"images/projectiles/fire.png")
-		if classes.Bug.going_right:
-			p.velx = 8
-		else:
-			p.image = pygame.transform.flip(p.image, True, False) # flip horizontally
-			p.velx = -8
+		def direction():
+			if classes.Bug.going_right:
+				p.velx = 8
+			else:
+				p.image = pygame.transform.flip(p.image, True, False) # flip horizontally
+				p.velx = -8
 
+		if (classes.BugProjectile.fire):
+			p = classes.BugProjectile(bug.rect.x, bug.rect.y,"images/projectiles/fire.png")
+			direction()
+		else:
+			p = classes.BugProjectile(bug.rect.x, bug.rect.y,"images/projectiles/frost.png")
+			direction()
 		
 	spawn(FPS, total_frames)
 	collisions()
@@ -48,7 +58,7 @@ def spawn(FPS, total_frames):
 			x = 640 - 40
 
 
-		classes.Fly(x, 130, 40, 35, "images/fly.png")
+		classes.Fly(x, 130, "images/fly.png")
 
 def collisions():
 	for fly in classes.Fly.List:

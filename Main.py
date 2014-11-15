@@ -12,11 +12,11 @@ FPS = 24
 total_frames = 0
 
 background = pygame.image.load("images/forest.jpg")
-bug = Bug(0,SCREENHEIGHT - 40,40,40,"images/bug.png")
-fly = Fly(40, 100, 40,40,"images/fly.png")
-fly1 = Fly(40, 200, 40,40,"images/fly.png")
-fly2 = Fly(40, 300, 40,40,"images/fly.png")
-fly3 = Fly(40, 400, 40,40,"images/fly.png")
+bug = Bug(0,SCREENHEIGHT - 40,"images/bug.png")
+fly = Fly(40, 100,"images/fly.png")
+fly1 = Fly(40, 200,"images/fly.png")
+fly2 = Fly(40, 300,"images/fly.png")
+fly3 = Fly(40, 400, "images/fly.png")
 
 
 while True:
