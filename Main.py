@@ -17,7 +17,7 @@ fly = Fly(40, 100, 40,40,"images/fly.png")
 while True:
 	process(bug)
 	bug.motion(SCREENWIDTH, SCREENHEIGHT)
-
+	fly.fly(SCREENWIDTH)
 	screen.blit(background, (0,0))
 	BaseClass.allsprites.draw(screen)
 

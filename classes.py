@@ -1,4 +1,5 @@
-import pygame
+import pygame, math
+from random import randint
 
 class BaseClass(pygame.sprite.Sprite):
 	allsprites = pygame.sprite.Group()
@@ -61,5 +62,22 @@ class Fly(BaseClass):
 	def __init__(self, x, y, width, height, image_string):
 		BaseClass.__init__(self, x, y, width, height, image_string)
 		Fly.List.add(self)
+		self.velx = randint(1, 4)
+		self.amplitude, self.period = randint(20,140), randint(4,5)/100.0
 
-		
+	def fly(self, SCREENWIDTH):
+		if self.rect.x + self.width > SCREENWIDTH or self.rect.x < 0:
+			self.image = pygame.transform.flip(self.image, True, False)
+			self.velx = -self.velx
+
+		self.rect.x += self.velx
+
+		# sine curve
+		# a * sin (bx + c) + y
+		# a => maximum height our wave can go_down
+		# b => period
+		# x => x position
+		# c => 
+		# y => how high our bug is flying
+
+		self.rect.y = self.amplitude * math.sin(self.period * self.rect.x) + 140
