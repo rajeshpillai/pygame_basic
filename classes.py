@@ -81,3 +81,8 @@ class Fly(BaseClass):
 		# y => how high our bug is flying
 
 		self.rect.y = self.amplitude * math.sin(self.period * self.rect.x) + 140
+
+	@staticmethod
+	def movement(SCREENWIDTH):
+		for fly in Fly.List:
+			fly.fly(SCREENWIDTH)

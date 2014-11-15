@@ -13,11 +13,15 @@ FPS = 24
 background = pygame.image.load("images/forest.jpg")
 bug = Bug(0,SCREENHEIGHT - 40,40,40,"images/bug.png")
 fly = Fly(40, 100, 40,40,"images/fly.png")
+fly1 = Fly(40, 200, 40,40,"images/fly.png")
+fly2 = Fly(40, 300, 40,40,"images/fly.png")
+fly3 = Fly(40, 400, 40,40,"images/fly.png")
 
 while True:
 	process(bug)
 	bug.motion(SCREENWIDTH, SCREENHEIGHT)
-	fly.fly(SCREENWIDTH)
+	Fly.movement(SCREENWIDTH)
+	
 	screen.blit(background, (0,0))
 	BaseClass.allsprites.draw(screen)
 
