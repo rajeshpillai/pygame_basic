@@ -22,14 +22,15 @@ fly3 = Fly(40, 400, 40,40,"images/fly.png")
 while True:
 	process(bug, FPS, total_frames)
 	bug.motion(SCREENWIDTH, SCREENHEIGHT)
-	Fly.movement(SCREENWIDTH)
+	Fly.update_all(SCREENWIDTH)
+	BaseClass.allsprites.update()
 	BugProjectile.movement()
 	total_frames += 1
 	
 	screen.blit(background, (0,0))
 	BaseClass.allsprites.draw(screen)
 	BugProjectile.List.draw(screen)
-	
+
 	pygame.display.flip()
 
 	clock.tick(FPS)
