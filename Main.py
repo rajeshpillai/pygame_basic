@@ -23,6 +23,7 @@ while True:
 	process(bug, FPS, total_frames)
 	bug.motion(SCREENWIDTH, SCREENHEIGHT)
 	Fly.movement(SCREENWIDTH)
+	BugProjectile.movement()
 	total_frames += 1
 	
 	screen.blit(background, (0,0))

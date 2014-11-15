@@ -11,9 +11,11 @@ def process(bug, FPS, total_frames):
 
 	# Horizontal movement
 	if keys[pygame.K_d]:
+		classes.Bug.going_right = True
 		bug.image = pygame.image.load("images/bug.png")
 		bug.velx = 5
 	elif keys[pygame.K_a]:
+		classes.Bug.going_right = False
 		bug.image = pygame.image.load("images/bugflipped.png")
 		bug.velx = -5
 	else:
@@ -23,10 +25,19 @@ def process(bug, FPS, total_frames):
 	# Vertical movement
 	if keys[pygame.K_w]:
 		bug.jumping = True
+
+	if keys[pygame.K_SPACE]:
+		p = classes.BugProjectile(bug.rect.x, bug.rect.y, 43, 25,"images/projectiles/fire.png")
+		if classes.Bug.going_right:
+			p.velx = 8
+		else:
+			p.image = pygame.transform.flip(p.image, True, False) # flip horizontally
+			p.velx = -8
+
 		
 	spawn(FPS, total_frames)
 
-	
+
 def spawn(FPS, total_frames):
 	four_seconds = FPS * 4
 	if total_frames % four_seconds == 0:
@@ -37,4 +48,4 @@ def spawn(FPS, total_frames):
 			x = 640 - 40
 
 
-		fly = classes.Fly(x, 130, 40, 35, "images/fly.png")
+		classes.Fly(x, 130, 40, 35, "images/fly.png")
