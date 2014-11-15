@@ -28,7 +28,8 @@ while True:
 	
 	screen.blit(background, (0,0))
 	BaseClass.allsprites.draw(screen)
-
+	BugProjectile.List.draw(screen)
+	
 	pygame.display.flip()
 
 	clock.tick(FPS)
