@@ -10,13 +10,14 @@ screen = pygame.display.set_mode((SCREENWIDTH,SCREENHEIGHT),0,32)
 clock = pygame.time.Clock()
 FPS = 24
 
+background = pygame.image.load("images/forest.jpg")
 bug = Bug(0,SCREENHEIGHT - 40,40,40,"images/bug.png")
 
 while True:
 	process(bug)
 	bug.motion(SCREENWIDTH, SCREENHEIGHT)
 
-	screen.fill((0,0,0))
+	screen.blit(background, (0,0))
 	BaseClass.allsprites.draw(screen)
 
 	pygame.display.flip()
