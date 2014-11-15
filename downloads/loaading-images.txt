@@ -1,0 +1,70 @@
+--------------------------------------------------------------------------------
+Main.py
+--------------------------------------------------------------------------------
+
+import pygame,sys
+
+pygame.init()
+
+
+WIDTH, HEIGHT = 640, 360
+screen = pygame.display.set_mode( (WIDTH, HEIGHT) )
+
+img_bug = pygame.image.load("bug.png")
+
+clock = pygame.time.Clock()
+FPS = 24
+# -------- Main Program Loop -----------
+while True:
+    # PROCESSING
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            
+            pygame.quit()
+            sys.exit()
+
+    # PROCESSING
+
+
+    # LOGIC
+    # LOGIC
+
+    # DRAW
+
+    screen.blit(img_bug, (200,200) )
+    pygame.display.flip()    
+    # DRAW
+    clock.tick(FPS)
+
+--------------------------------------------------------------------------------
+classes.py
+--------------------------------------------------------------------------------
+
+
+import pygame
+
+class BaseClass(pygame.sprite.Sprite):
+ 
+ allsprites = pygame.sprite.Group()
+ def __init__(self, x, y, width, height, image_string):
+  
+  pygame.sprite.Sprite.__init__(self)
+  BaseClass.allsprites.add(self)
+
+  self.image = pygame.image.load(image_string)
+  
+  self.rect = self.image.get_rect()
+  self.rect.x = x
+  self.rect.y = y
+
+  self.width = width
+  self.height = height
+
+
+
+
+
+
+
+
+  
