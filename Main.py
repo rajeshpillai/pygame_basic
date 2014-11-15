@@ -1,10 +1,16 @@
 import pygame, sys
+from classes import *
 
 pygame.init()
 
 WIDTH, HEIGHT = 640, 360
 screen = pygame.display.set_mode((WIDTH,HEIGHT),0,32)
-img_bug = pygame.image.load("images/bug.png") # .convert_alpha()
+clock = pygame.time.Clock()
+FPS = 24
+
+bug = Bug(0,100,40,40,"images/bug.png")
+bug2 = Bug(0,200,40,40,"images/bug.png")
+bug3 = Bug(0,300,40,40,"images/bug.png")
 
 while True:
 	#PROCESSES
@@ -13,6 +19,11 @@ while True:
 			pygame.quit()
 			sys.exit()
 
+	bug.motion()
+	
+	screen.fill((0,0,0))
+	BaseClass.allsprites.draw(screen)
 
-	screen.blit(img_bug, (200,200))
 	pygame.display.flip()
+
+	clock.tick(FPS)
