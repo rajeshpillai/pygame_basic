@@ -61,9 +61,19 @@ def spawn(FPS, total_frames):
 		classes.Fly(x, 130, "images/fly.png")
 
 def collisions():
+	# freeze flies
+	# width px projectiles
+
 	for fly in classes.Fly.List:
-		fly_proj = pygame.sprite.spritecollide(fly, classes.BugProjectile.List, True)
-		if len(fly_proj ) > 0:
-			for hit in fly_proj:
+		if pygame.sprite.spritecollide(fly, classes.BugProjectile.List, False):
+			if classes.BugProjectile.fire:
 				fly.health -= fly.half_health
+			else:
+				fly.velx = 0
+
+	for proj in classes.BugProjectile.List:
+		if pygame.sprite.spritecollide(proj, classes.Fly.List, False):
+			proj.rect.x = 2 * -proj.rect.width
+			proj.destroy()
+			
 

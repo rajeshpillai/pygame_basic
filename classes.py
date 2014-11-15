@@ -132,3 +132,8 @@ class BugProjectile(pygame.sprite.Sprite):
 	def movement():
 		for projectile in BugProjectile.List:
 			projectile.rect.x += projectile.velx
+
+	def destroy(self):
+		BugProjectile.List.remove(self)
+		BugProjectile.normal_list.remove(self)
+		del self
