@@ -22,6 +22,10 @@ class Bug(BaseClass):
 		Bug.List.add(self)
 		self.velx = 3
 
-	def motion(self):
+	def motion(self, SCREENWIDTH):
+		if self.rect.x < 0:
+			self.rect.x = 0
+		elif  self.rect.x + self.width > SCREENWIDTH:
+			self.rect.x = SCREENWIDTH - self.width
+
 		self.rect.x += self.velx
-		
