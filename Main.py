@@ -16,6 +16,7 @@ white = (255,255,255)
 black = (0,0,0)
 pink = (255,200,200)
 
+i = 0
 while True:
 	#PROCESSES
 	for event in pygame.event.get():
@@ -26,6 +27,14 @@ while True:
 
 	#PROCESSES
 	#LOGIC
-	screen.fill(white);
+	i += 5
+	if i > 255:
+		i %= 255
+
+
+	screen.fill((i,i,i))
+
 	pygame.draw.line(screen, clr2, (0 , 0), (640 , 360))
+	pygame.draw.rect(screen, clr3, (40,40,300,45))
+	pygame.draw.circle(screen, clr1, (350,200), 80, 40)
 	pygame.display.flip()
