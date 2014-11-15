@@ -23,9 +23,11 @@ class Bug(BaseClass):
 		self.velx = 3
 
 	def motion(self, SCREENWIDTH):
-		if self.rect.x < 0:
-			self.rect.x = 0
-		elif  self.rect.x + self.width > SCREENWIDTH:
-			self.rect.x = SCREENWIDTH - self.width
-
+		predicted_location = self.rect.x + self.velx
+		
+		if predicted_location < 0:
+			self.velx = 0
+		elif  predicted_location + self.width > SCREENWIDTH:
+			self.velx = 0
+		
 		self.rect.x += self.velx
