@@ -10,8 +10,10 @@ def process(bug):
 	keys = pygame.key.get_pressed()
 
 	if keys[pygame.K_d]:
+		bug.image = pygame.image.load("images/bug.png")
 		bug.velx = 5
 	elif keys[pygame.K_a]:
+		bug.image = pygame.image.load("images/bugflipped.png")
 		bug.velx = -5
 	else:
 		bug.velx = 0
