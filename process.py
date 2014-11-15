@@ -9,6 +9,7 @@ def process(bug):
 	# Returns a list of all the keys whther pressed or not
 	keys = pygame.key.get_pressed()
 
+	# Horizontal movement
 	if keys[pygame.K_d]:
 		bug.image = pygame.image.load("images/bug.png")
 		bug.velx = 5
@@ -18,3 +19,8 @@ def process(bug):
 	else:
 		bug.velx = 0
 
+
+	# Vertical movement
+	if keys[pygame.K_w]:
+		bug.jumping = True
+		

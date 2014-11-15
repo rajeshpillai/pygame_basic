@@ -17,12 +17,15 @@ class BaseClass(pygame.sprite.Sprite):
 
 class Bug(BaseClass):
 	List = pygame.sprite.Group()
+	
 	def __init__(self, x, y, width, height, image_string):
 		BaseClass.__init__(self, x, y, width,height, image_string)
 		Bug.List.add(self)
-		self.velx = 3
+		self.velx, self.vely = 0, 5
+		self.jumping, self.go_down = False, False
 
-	def motion(self, SCREENWIDTH):
+
+	def motion(self, SCREENWIDTH, SCREENHEIGHT):
 		predicted_location = self.rect.x + self.velx
 		
 		if predicted_location < 0:
@@ -31,3 +34,24 @@ class Bug(BaseClass):
 			self.velx = 0
 		
 		self.rect.x += self.velx
+
+		self.__jump(SCREENHEIGHT)
+
+	def __jump(self,SCREENHEIGHT):
+
+		max_jump = 75
+
+		if self.jumping:
+			if self.rect.y < max_jump:
+				self.go_down = True
+
+			if self.go_down:
+				self.rect.y += self.vely
+				predicted_location = self.rect.y + self.vely
+
+				if predicted_location + self.height > SCREENHEIGHT:
+					self.jumping = False
+					self.go_down = False
+
+			else:
+				self.rect.y -= self.vely

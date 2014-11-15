@@ -14,7 +14,7 @@ bug = Bug(0,SCREENHEIGHT - 40,40,40,"images/bug.png")
 
 while True:
 	process(bug)
-	bug.motion(SCREENWIDTH)
+	bug.motion(SCREENWIDTH, SCREENHEIGHT)
 
 	screen.fill((0,0,0))
 	BaseClass.allsprites.draw(screen)
