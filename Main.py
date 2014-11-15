@@ -4,7 +4,7 @@ pygame.init()
 
 WIDTH, HEIGHT = 640, 360
 screen = pygame.display.set_mode((WIDTH,HEIGHT),0,32)
-img_bug = pygame.image.load("bug.png")
+img_bug = pygame.image.load("images/bug.png") # .convert_alpha()
 
 while True:
 	#PROCESSES
