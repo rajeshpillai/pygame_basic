@@ -67,18 +67,24 @@ class Fly(BaseClass):
 	def __init__(self, x, y, image_string):
 		BaseClass.__init__(self, x, y, image_string)
 		Fly.List.add(self)
-		self.velx = randint(1, 4)
+		
+		self.velx, self.vely = randint(1, 4), 2
+
 		self.amplitude, self.period = randint(20,140), randint(4,5)/100.0
 		self.health = 100
 		self.half_health = self.health / 2.0
 
 	@staticmethod
-	def update_all(SCREENWIDTH):
+	def update_all(SCREENWIDTH, SCREENHEIGHT):
 		for fly in Fly.List:
-			fly.fly(SCREENWIDTH)
-			if fly.health <= 0:
-				fly.destroy(Fly)
-
+			if fly.health <= 0: # Is dead
+				fly.velx = 0
+        	
+				if fly.rect.y + fly.rect.height < SCREENHEIGHT:
+					fly.rect.y += fly.vely
+			else:
+				fly.fly(SCREENWIDTH)
+			
 
 	def fly(self, SCREENWIDTH):
 		if self.rect.x + self.rect.width > SCREENWIDTH or self.rect.x < 0:
@@ -97,22 +103,20 @@ class Fly(BaseClass):
 
 		self.rect.y = self.amplitude * math.sin(self.period * self.rect.x) + 140
 
-	#@staticmethod
-	#def movement(SCREENWIDTH):
-	#	for fly in Fly.List:
-	#		fly.fly(SCREENWIDTH)
 
 class BugProjectile(pygame.sprite.Sprite):
 	List = pygame.sprite.Group()
 	normal_list = []
 	fire = True
 
-	def __init__(self, x, y, image_string):
+	def __init__(self, x, y, isFire, image_string):
 		pygame.sprite.Sprite.__init__(self)
 		self.image = pygame.image.load(image_string)
 		self.rect = self.image.get_rect()
 		self.rect.x = x
 		self.rect.y = y
+
+		self.isFire = isFire
 		
 		try:
 			last_element = BugProjectile.normal_list[-1]

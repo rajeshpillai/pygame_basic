@@ -22,7 +22,9 @@ fly3 = Fly(40, 400, "images/fly.png")
 while True:
 	process(bug, FPS, total_frames)
 	bug.motion(SCREENWIDTH, SCREENHEIGHT)
-	Fly.update_all(SCREENWIDTH)
+
+	Fly.update_all(SCREENWIDTH, SCREENHEIGHT)
+	
 	BaseClass.allsprites.update()
 	BugProjectile.movement()
 	total_frames += 1

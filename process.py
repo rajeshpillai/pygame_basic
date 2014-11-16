@@ -14,11 +14,11 @@ def process(bug, FPS, total_frames):
 	keys = pygame.key.get_pressed()
 
 	# Horizontal movement
-	if keys[pygame.K_d]:
+	if keys[pygame.K_RIGHT]:
 		classes.Bug.going_right = True
 		bug.image = pygame.image.load("images/bug.png")
 		bug.velx = 5
-	elif keys[pygame.K_a]:
+	elif keys[pygame.K_LEFT]:
 		classes.Bug.going_right = False
 		bug.image = pygame.image.load("images/bugflipped.png")
 		bug.velx = -5
@@ -27,7 +27,7 @@ def process(bug, FPS, total_frames):
 
 
 	# Vertical movement
-	if keys[pygame.K_w]:
+	if keys[pygame.K_UP]:
 		bug.jumping = True
 
 	if keys[pygame.K_SPACE]:
@@ -39,10 +39,10 @@ def process(bug, FPS, total_frames):
 				p.velx = -8
 
 		if (classes.BugProjectile.fire):
-			p = classes.BugProjectile(bug.rect.x, bug.rect.y,"images/projectiles/fire.png")
+			p = classes.BugProjectile(bug.rect.x, bug.rect.y, True,"images/projectiles/fire.png")
 			direction()
 		else:
-			p = classes.BugProjectile(bug.rect.x, bug.rect.y,"images/projectiles/frost.png")
+			p = classes.BugProjectile(bug.rect.x, bug.rect.y,False,"images/projectiles/frost.png")
 			direction()
 		
 	spawn(FPS, total_frames)
@@ -64,16 +64,32 @@ def collisions():
 	# freeze flies
 	# width px projectiles
 
-	for fly in classes.Fly.List:
-		if pygame.sprite.spritecollide(fly, classes.BugProjectile.List, False):
-			if classes.BugProjectile.fire:
-				fly.health -= fly.half_health
-			else:
-				fly.velx = 0
+#	for fly in classes.Fly.List:
+#		if pygame.sprite.spritecollide(fly, classes.BugProjectile.List, False):
+#			if classes.BugProjectile.fire:
+#				fly.health -= fly.half_health
+#			else:
+#				fly.velx = 0
+#
+#	for proj in classes.BugProjectile.List:
+#		if pygame.sprite.spritecollide(proj, classes.Fly.List, False):
+#			proj.rect.x = 2 * -proj.rect.width
+#			proj.destroy()
 
-	for proj in classes.BugProjectile.List:
-		if pygame.sprite.spritecollide(proj, classes.Fly.List, False):
-			proj.rect.x = 2 * -proj.rect.width
-			proj.destroy()
-			
+    for fly in classes.Fly.List:
+        projectiles = pygame.sprite.spritecollide(fly,classes.BugProjectile.List, True)
+        for projectile in projectiles:
+        	fly.health = 0
+
+        	if projectile.isFire:
+        		fly.image = pygame.image.load("images/burnt_fly.png")
+        	else:
+        		if fly.velx > 0:
+        			fly.image = pygame.image.load("images/frozen_fly.png")
+        		elif fly.velx < 0:
+        			fly.image = pygame.image.load("images/frozen_fly.png")
+        			fly.image = pygame.transform.flip(fly.image, True, False)
+    		projectile.rect.x = 2 * -projectile.rect.width
+    		projectile.destroy()
+
 
