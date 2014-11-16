@@ -78,8 +78,9 @@ def collisions():
 
     for fly in classes.Fly.List:
         projectiles = pygame.sprite.spritecollide(fly,classes.BugProjectile.List, True)
+        
         for projectile in projectiles:
-        	fly.health = 0
+        	fly.health = 0  # We killed a lfy
 
         	if projectile.isFire:
         		fly.image = pygame.image.load("images/burnt_fly.png")
@@ -89,6 +90,7 @@ def collisions():
         		elif fly.velx < 0:
         			fly.image = pygame.image.load("images/frozen_fly.png")
         			fly.image = pygame.transform.flip(fly.image, True, False)
+    		
     		projectile.rect.x = 2 * -projectile.rect.width
     		projectile.destroy()
 

@@ -78,12 +78,11 @@ class Fly(BaseClass):
 	def update_all(SCREENWIDTH, SCREENHEIGHT):
 		for fly in Fly.List:
 			if fly.health <= 0: # Is dead
-				fly.velx = 0
-        	
-				if fly.rect.y + fly.rect.height < SCREENHEIGHT:
-					fly.rect.y += fly.vely
+				fly.velx = 0 # This fly is now paralyzed, it can't move!
+				if fly.rect.y + fly.rect.height < SCREENHEIGHT: # If fly is above ground
+					fly.rect.y += fly.vely # Move down
 			else:
-				fly.fly(SCREENWIDTH)
+				fly.fly(SCREENWIDTH) # Sine Curve!
 			
 
 	def fly(self, SCREENWIDTH):
